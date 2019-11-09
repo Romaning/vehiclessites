@@ -1,0 +1,682 @@
+@extends('layouts.layoutmaster')
+@section('title')
+
+@endsection
+@section('styles')
+    <!-- Page JS Plugins CSS BE_FORM_PLUGINS -->
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('assets/js/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/dropzone/dist/min/dropzone.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/flatpickr/flatpickr.min.css')}}">
+    <!-- Stylesheets -->
+    <!-- Page CSS DIRECTO PARA SHOW VEHICULO -->
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/flatpickr/themes/material_green.css')}}">
+
+    <!-- Page JS Plugins CSS -->
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/slick-carousel/slick.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/slick-carousel/slick-theme.css')}}">
+
+@endsection
+@section('hero_cuadro_bienvenida')
+    <!-- Hero -->
+    <div class="bg-image" style="background-image: url({{asset('image_proyect/fondo_hero3.jpg')}});">
+        <div class="bg-black-50">
+            <div class="content content-full text-center">
+                <div class="my-3">
+                    <img class="img-avatar img-avatar-thumb" src="{{asset('carpeta_imagenes/2911PHCAZUL1.jpg')}}" alt=""
+                         id="imagen_perfil_hero">
+                </div>
+                <h1 class="h2 text-white mb-0"></h1>
+                <span class="text-white-75" id="ci_perfil_hero">
+                    Nombre Funcionario
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+    {{--@include('componentes.4_A_Hero(otrabienvenida)')--}}
+@endsection
+@section('content')
+    {{--
+    'ci',
+    'ci_exped_en',
+    'apellidos',
+    'nombres',
+    'fecha_nac',
+    'categoria_licencia',
+    'numero_licencia',
+    'fecha_expedicion_licencia',
+    'fecha_vencimiento_licencia',
+    'numero_accidentes',
+    'contacto',
+    'imagen_perfil',
+    'estado_func_id',
+    'departamento_id',
+    --}}
+    {{csrf_field()}}
+    <!-- Basic -->
+
+    <div class="block shadow p-2 mb-1 rounded" data-toggle="appear" data-class="animated bounceIn">
+        <div class="block-header">
+            <h3 class="block-title">FORMULARIO</h3>
+        </div>
+        <div class="block-content block-content-full">
+            <form action="{{route('funcionario.store')}}" method="POST" enctype="multipart/form-data"
+                  id="form_subir_subir_funcionario">
+                @csrf
+                @method('POST')
+                {{-- ############### FORMULARIO EN EL CENTRO ############--}}
+                <div class="row push">
+                    <div class="col-lg-2">
+
+                        <div class="row">
+                            <div class="col" data-toggle="appear" data-class="animated zoomIn">
+                                <!-- Team Member -->
+                                <div class="block">
+                                    <div class="block-content">
+                                        <img src="{{asset('assets/media/avatars/avatar13.jpg')}}" width="100%"
+                                             height="100%" id=""
+                                             class="justify-content-center">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                        <input type="file" class="custom-file-input" data-toggle="custom-file-input"
+                                               id="imagen_perfil"
+                                               name="imagen_perfil">
+                                        <label class="custom-file-label" for="imagen_perfil">Imagen</label>
+                                    </div>
+                                </div>
+                                <!-- END Team Member -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="ci">CI: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="ci" id="ci" required>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="ci_exped_en">EXP: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="ci_exped_en" id="ci_exped_en">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="apellidos">APELLIDOS: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="apellidos" id="apellidos">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="nombres">NOMBRES: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nombres" id="nombres">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="fecha_nac">FECHA NACIMIENTO: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="fecha_nac" id="fecha_nac">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="numero_licencia">NUMERO LICENCIA: </label>
+                                    <input type="text" class="form-control" name="numero_licencia" id="numero_licencia">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="categoria_licencia">CAT..: </label>
+                                    <input type="text" class="form-control" name="categoria_licencia"
+                                           id="categoria_licencia">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="fecha_expedicion_licencia">FECHA EXPEDICION LICENCIA: </label>
+                                    <input type="text" class="form-control" name="fecha_expedicion_licencia"
+                                           id="fecha_expedicion_licencia">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="fecha_vencimiento_licencia">FECHA VENCIMIENTO LICENCIA: </label>
+                                    <input type="text" class="form-control" name="fecha_vencimiento_licencia"
+                                           id="fecha_vencimiento_licencia">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="numero_accidentes">NUMERO DE ACCIDENTES: </label>
+                                    <input type="text" class="form-control" name="numero_accidentes"
+                                           id="numero_accidentes">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="departamento_id">DEPARTAMENTO: </label>
+                                    <input type="text" class="form-control" name="departamento_id" id="departamento_id">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="contacto">CONTACTO: </label>
+                                    <input type="text" class="form-control" name="contacto" id="contacto"
+                                           placeholder="telefono, celular, correo....">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="mb-4">ESTADO FUNCIONARIO: <span
+                                        class="font-italic">(Arrastre por favor)</span></label>
+                                <input type="text" class="js-rangeslider" id="estado_func_id" name="estado_func_id"
+                                       value=""
+                                       data-grid="true" data-from="0"
+                                       data-values="ACTIVO, INACTIVO, DESPEDIDO, CONTRATO_FINALIZADO">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success shadow p-2 mb-1 rounded"
+                                            style="float: right;">
+                                        GUARDAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <p class="font-size-sm text-muted">
+                            .
+                        </p>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="block shadow p-2 mb-1 rounded d-none" data-toggle="appear" data-class="animated bounceIn">
+        <div class="block-header">
+            <h3 class="block-title">FORMULARIO</h3>
+        </div>
+        <div class="block-content block-content-full">
+            <form action="{{route('vehiculo.store')}}" method="POST" enctype="multipart/form-data"
+                  id="fsd">
+                @csrf
+                @method('POST')
+                {{--#################################################################--}}
+                <div class="col-lg-4">
+                    <p class="font-size-sm text-muted">
+                        INGRESE FUNCIONARIO
+                    </p>
+                </div>
+                <div class="row push">
+                    <div class="col-lg-8 ">
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="tipo_uso_id">TIPO USO: <span class="text-danger">*</span></label>
+                                    <select class="js-select2 form-control" id="tipo_uso_id" name="tipo_uso_id"
+                                            style="width: 100%;" data-placeholder="Escoger..." required>
+                                        <option></option>
+                                        <!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                                        {{--@foreach($datostipo_uso as $filatipo_uso)
+                                            <option
+                                                value="{{$filatipo_uso->tipo_uso_id}}">{{$filatipo_uso->tipo_uso_descripcion}}</option>
+                                        @endforeach--}}
+                                    </select>
+                                </div>
+
+                                <div class="col">
+                                    <label for="fecha_incorporacion_institucion">FECHA DE INCORPORACION A INSTITUCION:
+                                        <span class="text-danger">*</span></label>
+                                    <input type="text" class="js-flatpickr form-control bg-white"
+                                           id="fecha_incorporacion_institucion"
+                                           name="fecha_incorporacion_institucion" placeholder="Año-mes-dia"
+                                           data-date-format="Y-m-d" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{--#########################################################################--}}
+                        <button type="submit" class="btn btn-success shadow p-2 mb-1 rounded" style="float: right;">
+                            GUARDAR
+                        </button>
+                    </div>
+                    <div class="col-lg-4">
+                        <p class="font-size-sm text-muted">
+                            PLACA: PUEDE CONTENER LETRAS, NUMEROS Y GUION
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="mensaje_respuesta_form_subir_datos_vehiculo"></div>
+    </div>
+    <!-- END Basic -->
+
+    <!-- Flatpickr Datetimepicker (.js-flatpickr class is initialized in Helpers.flatpickr()) -->
+    <!-- For more info and examples you can check out https://github.com/flatpickr/flatpickr -->
+    <div class="block shadow p-2 mb-1 rounded d-none" data-toggle="appear" data-class="animated bounceIn">
+        <div class="block-header">
+            <h3 class="block-title">SUBIR ESTADO DE SERVICIO DEL VEHICULO</h3>
+        </div>
+
+        <div class="block-content">
+            <!-- Page Content -->
+            <div class="content content-boxed">
+                <div class="row">
+                    <div class="col-sm-6 col-xl-1 invisible" data-toggle="appear" data-class="animated zoomIn">
+                    </div>
+                    <div class="col-sm-6 col-xl-10 invisible" data-toggle="appear" data-class="animated zoomIn">
+                        <!-- Team Member -->
+                        <div class="block">
+                            <div class="block-header">
+                            </div>
+                            <div class="block-content font-size-sm">
+                                <img src="" width="100%" height="100%" id=""
+                                     class="justify-content-center"
+                                     style="justify-content: center;">
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" value="" id=""
+                                               class="form-control btn btn-info"
+                                               style="width: 100%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Team Member -->
+                    </div>
+                    <div class="col-sm-6 col-xl-1 invisible" data-toggle="appear" data-class="animated zoomIn">
+                    </div>
+                </div>
+            </div>
+            <!-- END Page Content -->
+        </div>
+        <div id="mensaje_respuesta_form_subir_est_serv_vehicular"></div>
+    </div>
+    <!-- END Flatpickr Datetimepicker -->
+
+    <form action="{{route('funcionario.store')}}" method="POST" enctype="multipart/form-data" class="d-none">
+        @csrf
+        @method('POST')
+        <div class="form-group mb-5">
+            <label class="mb-4">Custom</label>
+            <input type="text" class="js-rangeslider" id="example-rangeslider7" name="example-rangeslider7"
+                   data-grid="true" data-from="2"
+                   data-values="January, February, March, April, May, June, July, August, September, October, November, December">
+        </div>
+        <button type="submit">
+            ENVIAR
+        </button>
+    </form>
+
+    <div class="d-none">
+        <button type="button" class="js-swal-success btn btn-light push" id="boton_exito">
+            <i class="fa fa-check-circle text-success mr-1"></i> Launch Dialog
+        </button>
+    </div>
+@endsection
+@section('js_script_import')
+    {{-- ################ START SCRIPTS PARA LA PAGINA DE VALIDACIONES BE_FORM_PLUGINS ###############--}}
+    <!-- Page JS Plugins -->
+    <script src="{{asset('assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/dropzone/dropzone.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/flatpickr/flatpickr.min.js')}}"></script>
+
+    <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Masked Inputs + Ion Range Slider plugins) -->
+    <script>jQuery(function () {
+            One.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'masked-inputs', 'rangeslider']);
+        });</script>
+
+    {{--############################################## CARROUSEL #############################################--}}
+    <!-- Page JS Plugins -->
+    <script src="{{asset('assets/js/plugins/slick-carousel/slick.min.js')}}"></script>
+
+    <!-- Page JS Helpers (Slick Slider Plugin) -->
+    <script>jQuery(function () {
+            One.helpers('slick');
+        });</script>
+    {{--###################################### time --}}
+
+    {{-- ############################################### END SCRIPTS  ######################################################--}}
+    <script>
+        function asignarPlacaIdATodaLaPagina() {
+            placavehiculo = $('#placa_id').val();
+
+            $('#placa_id_subida_docs_prop_vehiculo').val(placavehiculo);
+            $('#placa_id_subida_imgs_perfil_vehiculo').val(placavehiculo);
+            $('#placa_id_subida_docs_renov_vehicular').val(placavehiculo);
+            $('#placa_id_subir_seguro').val(placavehiculo);
+            $('#placa_id_subida_estado_servicio_vehicular').val(placavehiculo);
+        }
+
+        /*JQUERY PARA ENVIAR FORM DE DATOS VEHICULO*/
+        $('#form_subir_datos_vehiculo').submit(function () {
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#boton_exito').click();
+                    $('#mensaje_respuesta_form_subir_datos_vehiculo').append(
+                        "<div class='alert alert-success d-flex align-items-center' role='alert'>" +
+                        "<div class='flex-00-auto'>" +
+                        "<i class='fa fa-fw fa-check'></i>" +
+                        "</div>" +
+                        "<div class='flex-fill ml-3'>" +
+                        "<p class='mb-0'>" + data + " <a class='alert-link' href='javascript:void(0)'></a>!</p>" +
+                        "</div>"
+                    );
+                }
+            });
+            return false;
+        });
+
+        /*JQUERY PARA ENVIAR FORM ESTADO SERVICIO DE VEHICULO*/
+        $('#form_subir_estado_servicio_vehicular').submit(function () {
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#boton_exito').click();
+                    $('#mensaje_respuesta_form_subir_est_serv_vehicular').append(
+                        "<div class='alert alert-success d-flex align-items-center' role='alert'>" +
+                        "<div class='flex-00-auto'>" +
+                        "<i class='fa fa-fw fa-check'></i>" +
+                        "</div>" +
+                        "<div class='flex-fill ml-3'>" +
+                        "<p class='mb-0'>" + data + " <a class='alert-link' href='javascript:void(0)'></a>!</p>" +
+                        "</div>"
+                    );
+                }
+            });
+            return false;
+        });
+        /*para subir documentos de vehiculo*/
+        Dropzone.options.myDropzoneDocsProp = {
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            maxFilezise: 500,
+            maxFiles: 200,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
+            addRemoveLinks: true,
+            init: function () {
+                var submitBtn = document.getElementById("submit_docs_prop_vehiculo");
+                myDropzoneDocsProp = this;
+                submitBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    myDropzoneDocsProp.processQueue();
+                });
+                this.on("addedfile", function (file) {
+                    $('#boton_exito').click();
+                    /*alert("file uploaded");*/
+                });
+
+                this.on("complete", function (file) {
+                    myDropzoneDocsProp.removeFile(file);
+                });
+
+                this.on("success",
+                    myDropzoneDocsProp.processQueue.bind(myDropzoneDocsProp)
+                );
+            }
+        };
+
+        /*para subir imagenes de perfil de vehiculo*/
+        Dropzone.options.myDropzoneImgsPerfil = {
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            maxFilezise: 500,
+            maxFiles: 200,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
+            addRemoveLinks: true,
+            init: function () {
+                var submitBtn = document.getElementById("submit_imgs_perfil_vehiculo");
+                myDropzoneImgsPerfil = this;
+
+                submitBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    myDropzoneImgsPerfil.processQueue();
+                });
+                this.on("addedfile", function (file) {
+                    $('#boton_exito').click();
+                    /*alert("file uploaded");*/
+                });
+
+                this.on("complete", function (file) {
+                    myDropzoneImgsPerfil.removeFile(file);
+                });
+
+                this.on("success",
+                    myDropzoneImgsPerfil.processQueue.bind(myDropzoneImgsPerfil)
+                );
+            }
+        };
+        /*JQUERY PARA ENVIAR FORM DE DOCUEMENTOS RENOVABLES*/
+        $('#form_subir_docs_renov_vehicular').submit(function () {
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#boton_exito').click();
+                    $('#mensaje_respuesta_form_subir_docs_renov_vehicular').append(
+                        "<div class='alert alert-success d-flex align-items-center' role='alert'>" +
+                        "<div class='flex-00-auto'>" +
+                        "<i class='fa fa-fw fa-check'></i>" +
+                        "</div>" +
+                        "<div class='flex-fill ml-3'>" +
+                        "<p class='mb-0'>" + data + " <a class='alert-link' href='javascript:void(0)'></a>!</p>" +
+                        "</div>"
+                    );
+                }
+            });
+            return false;
+        });
+        /*JQUERY PARA ENVIAR FORM DE SUBIR SEGUROS DE VEHICULO*/
+        /*$('#form_subir_seguros').submit(function () {
+            var campoa = $('#form_subir_seguros').find('input[name^="campoa"]').serialize();
+            var campob = $('#form_subir_seguros').find('input[name^="campob"]').serialize();
+            var campoc = $('#form_subir_seguros').find('input[name^="campoc"]').serialize();
+            var campod = $('#form_subir_seguros').find('input[name^="campod"]').serialize();
+            var campoe = $('#form_subir_seguros').find('input[name^="campoe"]').serialize();
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: {
+                    campoa:campoa,
+                    campob:campob,
+                    campoc:campoc,
+                    campod:campod,
+                    campoe:campoe,
+                },
+                success : function (data) {
+                    $('#mensaje_respuesta_form_subir_seguros').html(data);
+                }
+            });
+            return false;
+        });*/
+        /*$('#form_subir_seguros').submit(function () {
+            $.ajax({
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serializeArray(),
+                success : function (data) {
+                    $('#mensaje_respuesta_form_subir_seguros').html(data);
+                }
+            });
+            return false;
+        });*/
+
+        /*Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("#myDropzone", {
+            url: "",
+            maxFileSize: 50,
+            addRemoveLinks: true,
+            //more dropzone options here
+        });
+
+        //Add existing files into dropzone
+        var existingFiles = [
+            { name: "2710rkfadelante.jpg", size: 12345678 },
+            { name: "Filename 4.pdf", size: 12345678 },
+            { name: "Filename 5.pdf", size: 12345678 }
+
+        ];
+        for (i = 0; i < existingFiles.length; i++) {
+            myDropzone.emit("addedfile", existingFiles[i]);
+            //myDropzone.emit("thumbnail", existingFiles[i], "/image/url");
+            myDropzone.emit("complete", existingFiles[i]);
+        }*/
+    </script>
+
+
+    {{-- ############################################### START Aparecer Seccion Subida Img & desaparecer Slider ######################################################--}}
+    <script>
+        /**/
+
+        var interuptor_tbn_documentos_propiedad_vehiculo = 0;
+        $(document).on('click', '#btn_insertar_documentos_propiedad_vehiculo', function () {
+            if (interuptor_tbn_documentos_propiedad_vehiculo == 0) {
+                $('#bloque_docs_prop_vehiculo').addClass('d-none') /*hacer que desaparezca el carrusel de imagenes*/
+                $('#bloque_subida_docs_prop_vehiculo').removeClass('d-none'); /*hacer que aparezca la seccion de subir archivos*/
+                /*$('html, body').animate({
+                    scrollTop: $("#enfoque_zona_subir_docs_prop_vehiculo").offset().top
+                }, 20);*/
+                interuptor_tbn_documentos_propiedad_vehiculo = 1;
+            } else {
+                $('#bloque_subida_docs_prop_vehiculo').addClass('d-none');  /*hacer que ahora se cierre la seccion de subir archivos*/
+                $('#bloque_docs_prop_vehiculo').removeClass('d-none') /*hacer que aparezca el carrusel de imagenes*/
+                /*location.reload();*//*recargamos la imagen*/
+                interuptor_tbn_documentos_propiedad_vehiculo = 0;
+                /*$('html, body').animate({
+                    scrollTop: $("#enfoque_zona_subir_docs_prop_vehiculo").offset().top
+                }, 20);*/
+            }
+        });
+
+
+        var interuptor_tbn_imagenes_perfil_vehiculo = 0;
+        $(document).on('click', '#btn_insertar_imagenes_perfil_vehiculo', function () {
+            if (interuptor_tbn_imagenes_perfil_vehiculo == 0) {
+                $('#bloque_imgenes_perfil_vehiculo').addClass('d-none') /*hacer que desaparezca el carrusel de imagenes*/
+                $('#bloque_subida_imagenes_perfil_vehiculo').removeClass('d-none'); /*hacer que aparezca la seccion de subir archivos*/
+                /*$('html, body').animate({
+                    scrollTop: $("#enfoque_zona_subir_imgs_perfil_vehiculo").offset().top
+                }, 1);*/
+                interuptor_tbn_imagenes_perfil_vehiculo = 1;
+            } else {
+                $('#bloque_subida_imagenes_perfil_vehiculo').addClass('d-none');  /*hacer que ahora se cierre la seccion de subir archivos*/
+                $('#bloque_imgenes_perfil_vehiculo').removeClass('d-none') /*hacer que aparezca el carrusel de imagenes*/
+                /*location.reload();*//*recargamos la imagen*/
+                interuptor_tbn_imagenes_perfil_vehiculo = 0;
+                /*$('html, body').animate({
+                    scrollTop: $("#enfoque_zona_subir_imgs_perfil_vehiculo").offset().top
+                }, 1);*/
+            }
+        });
+    </script>
+
+    {{--##############################################  js  #####################################################--}}
+    <script>
+        /*"<td class='d-none d-sm-table-cell font-size-sm'>" +
+            "<div class='col-md-12' style='float: right;'>" +
+                "<input type='file' class='custom-file-input' value='' id='archiv' name='campoe[]' required>" +
+                "<label class='custom-file-label' id='archiv' id='nfile'></label>" +
+            "</div>" +
+        "</td>" +*/
+        var contador = 0;
+        $(document).on('click', '#btn_generar_filas', function () {
+            contador = contador + 1;
+            $('#body_tb_form_in').append(
+                "<tr>" +
+                "<td class='d-none'>" +
+                "<input type='hidden' name='placa_id[]' value='' class='placa_id_subir_seguro' id='' required>" +
+                "</td>" +
+                "<td class='d-none d-sm-table-cell font-size-sm'>" +
+                "<input type='text' value='{{date('Y')}}' class='form-control' name='campoa[]' placeholder='20XX...' required>" +
+                "</td>" +
+                "<td class='d-none d-sm-table-cell font-size-sm'>" +
+                "<input type='text' value='' class='form-control' name='campob[]' required>" +
+                " </td>" +
+                "<td class='d-none d-sm-table-cell font-size-sm'>" +
+                "<input type='text' value='' class='form-control' name='campoc[]' required>" +
+                "</td>" +
+                " <td class='d-none d-sm-table-cell font-size-sm'>" +
+                "<input type='text' value='' class='js-flatpickr form-control material_green datepickerr" + contador + "' name='campod[]' placeholder='Año-mes-dia' required>" +
+                "</td>" +
+                "<td class='d-none d-sm-table-cell font-size-sm'>" +
+                "<div class='col-md-12' style='float: right;'>" +
+                "<input type='file' class='custom-file-input' value='' name='campoe[]' required>" +
+                "</div>" +
+                "</td>" +
+                " <td class='btn-eliminar justify-content-center'>" +
+                "<div class=''>" +
+                "<i class='fas fa-trash'></i>" +
+                "</div>" +
+                "</td>" +
+                " </tr>"
+            );
+            $(".datepickerr" + contador).flatpickr();
+            $(".datepickerr" + contador).flatpickr("option", "dateFormat", "yy-mm-dd");
+
+            placavehiculo = $('#placa_id').val();
+            $('.placa_id_subir_seguro').val(placavehiculo);
+        });
+        $(document).on('click', '.btn-eliminar', function () {
+            $(this).parent().remove();
+        })
+
+        /*document.getElementById('archiv').onchange = function () {
+            console.log(this.value);
+            document.getElementById('nfile').innerHTML = document.getElementById('archiv').files[0].name;
+        }*/
+        /*$(document).on('change', '.archiv',function () {
+            var d = $(this).val();
+            $('.nfile').text(d);
+        });*/
+        /*document.getElementsByClassName('archiv').onchange = function () {
+            console.log(this.value);
+            document.getElementsByClassName('nfile').innerHTML = document.getElementById('archiv').files[0].name;
+        }*/
+    </script>
+    {{--<script src="{{asset('jsromsys/vehiculos.create.js')}}"></script>--}}
+
+@endsection
+
